@@ -17,7 +17,7 @@
 			<input type="text" class="email form-control" placeholder="El. paštas"><br>
 			<textarea class="comment_text form-control" placeholder="Jūsų komentaras"></textarea>
 			<p>&nbsp;</p>
-			<a href="javascript:void(0)" class="btn btn-primary submit">Submit</a>
+			<a href="javascript:void(0)" class="btn btn-primary submit">Komentuoti</a>
 		</div>
         </div>
 		<div class="clearfix"></div>
@@ -59,7 +59,6 @@
 		success:function()
 		{
 		alert("Your comment has been posted");
-        // $(.form-control).reset();
 		listComments();
 		}
 		})
