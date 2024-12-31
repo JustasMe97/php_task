@@ -1,18 +1,18 @@
 <?php
 $link = mysqli_connect("localhost","root","","comments");
 $commentsCount=mysqli_num_rows(mysqli_query($link,"SELECT * FROM comments"));
-$result = mysqli_query($link,"SELECT * FROM comments WHERE parent_id=-1 ORDER BY comment_date DESC");
+$parentComments = mysqli_query($link,"SELECT * FROM comments WHERE parent_id=-1 ORDER BY comment_date DESC");
 
-if(mysqli_num_rows($result)>0)
+if(mysqli_num_rows($parentComments)>0)
 {
     
     echo '<div class="fw-bold h4 mb-3">'.$commentsCount.' komentarų(-ai)</div>';
     $output='';
-    while($row=mysqli_fetch_object($result))
+    while($row=mysqli_fetch_object($parentComments))
 	{
         $output .= '<div class="single_comment">
-        <div class="bg-light rounded p-2 mt-2 mb-2">
-        <div class="d-flex">
+        <div class="bg-light rounded px-3 pb-3 my-2">
+        <div class="d-flex align-items-center">
         <div class="d-flex">
 		<div class="fw-bold">'.$row->name.'</div>
         <div class="mx-1">'.$row->comment_date.'</div>
@@ -29,11 +29,11 @@ if(mysqli_num_rows($result)>0)
     </div>
     
     <div style="display:none;" class="replyForm ms-5">
-    <input type="text" class="nameReply form-control" placeholder="Vardas"><br>
-    <input type="text" class="emailReply form-control" placeholder="El. paštas"><br>
-    <input type="hidden" class="parent_idReply" value="'.$row->id.'"><br>
-    <textarea class="comment_textReply form-control" placeholder="Jūsų komentaras"></textarea>
-    <p>&nbsp;</p>
+    <input type="text" id="name" class="nameReply form-control" placeholder="Vardas"><br>
+    <input type="text" id="email" class="emailReply form-control" placeholder="El. paštas"><br>
+    <input type="hidden" class="parent_idReply" value="'.$row->id.'">
+    <textarea id="comment" class="comment_textReply form-control" placeholder="Jūsų komentaras"></textarea>
+    <br>
     <a href="javascript:void(0)" class="btn btn-light submitReply">Komentuoti</a>
     </div>
     </div>'
@@ -53,12 +53,12 @@ function getReplies($link,$parent_id){
             while($row=mysqli_fetch_object($replies))
 	        {
                 $outputReplies .= '
-                    <div class="bg-light rounded p-2 mt-2 mb-2 ms-5">
+                    <div class="bg-light rounded p-3 mt-2 mb-2 ms-5">
                         <div class="d-flex">
                             <div class="fw-bold">'.$row->name.'</div>
                             <div class="mx-1">'.$row->comment_date.'</div>
                         </div>
-                            <div class="col-md-5">'.$row->comment_text.'</div>
+                            <div class="mt-1">'.$row->comment_text.'</div>
                             <div class="clearfix"></div>
                         <p>&nbsp;</p>
                     </div>';
