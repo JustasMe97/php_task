@@ -15,7 +15,7 @@ if(mysqli_num_rows($parentComments)>0)
         <div class="d-flex align-items-center">
         <div class="d-flex">
 		<div class="fw-bold">'.$row->name.'</div>
-        <div class="mx-1">'.$row->comment_date.'</div>
+        <div class="mx-1">'.date('d M Y', strtotime($row->comment_date)).'</div>
         </div>
         <div class="d-flex flex-grow-1 justify-content-end">
         <div type="button" class="reply btn" id="'.$row->id.'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
@@ -38,12 +38,12 @@ if(mysqli_num_rows($parentComments)>0)
     </div>
     </div>'
     ;
+        //prideda atsakymus prie atitinkamų komentarų
         $output .= getReplies($link,$row->id);
     }
     echo $output.='</div>';
 
 }
-
 
 function getReplies($link,$parent_id){
     $outputReplies='';

@@ -35,20 +35,17 @@ if (empty($name) || empty($email) || empty($comment_text)) {
         mysqli_query($link,$q);
     }
 ?>
-
+<?php
+if($parent_id==-1){
+echo '
 <script>
 $(document).ready(function() {
 
-    console.log("JavaScript is running");
-    // $("#name").addClass("input-error");
-    // $("#email").addClass("input-error");
-    // $("#comment").addClass("input-error");
-
 $("#name, #email, #comment").removeClass("input-error");
-var errorEmptyName = "<?php echo $errorEmptyName; ?>";
-var errorEmptyEmail = "<?php echo $errorEmptyEmail; ?>";
-var errorEmptyComment = "<?php echo $errorEmptyComment; ?>";
-var errorEmail = "<?php echo $errorEmail; ?>";
+var errorEmptyName = "'.$errorEmptyName.'";
+var errorEmptyEmail = "'.$errorEmptyEmail.'";
+var errorEmptyComment = "'.$errorEmptyComment.'";
+var errorEmail = "'.$errorEmail.'";
 if (errorEmptyName == true) {
     $("#name").addClass("input-error");
 }   if (errorEmptyEmail == true) {
@@ -64,4 +61,6 @@ if (errorEmptyName == false && errorEmptyEmail == false && errorEmptyComment == 
 }
 
 })
-</script>
+</script>';
+}
+?>

@@ -3,23 +3,21 @@
 <head>
 	<title>Comments</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<!-- <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css"> -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	
 </head>
 <body>
-	<div class="container">
+<div class="container-fluid">
     <h1 class="d-flex justify-content-center">Komentarų forma</h1>
             <p>&nbsp;</p>
         <div class="d-flex align-items-center flex-column">
            
-		<div class="col-md-6">
+		<div class="col-lg-6 col-md-12">
 			<input type="text" id="name" class="name form-control" placeholder="Vardas"><br>
 			<input type="text" id="email" class="email form-control" placeholder="El. paštas"><br>
             <input type="hidden" class="parent_id" value="-1">
 			<textarea id="comment" class="comment_text form-control" placeholder="Jūsų komentaras"></textarea>
-			<!-- <p>&nbsp;</p> -->
              <br>
 			<a href="javascript:void(0)" class="btn btn-light submit">Komentuoti</a>
 		</div>
@@ -29,7 +27,7 @@
         <p>&nbsp;</p>
 
         <div class="d-flex justify-content-center">
-		<div class="col-md-6 comment_listing"></div>
+		<div class="col-lg-6 col-md-12 comment_listing"></div>
         </div>
 
 	</div>
@@ -51,12 +49,8 @@
 
 	$(function(){
 
-
 		listComments();
-		// setInterval(function(){
-		// listComments();
-		// },10000);
-    
+
 		$('.submit').click(function(){
 		var name = $('.name').val();
 		var email = $('.email').val();
@@ -68,7 +62,6 @@
 		type:'post',
 		success:function(response){
         $('.form_message').html(response);
-		// alert("Your comment has been posted");
         $.globalEval(response);
 		listComments();
 		}
@@ -81,9 +74,9 @@
 
 <script>
 $(document).on("click", ".reply", function() {
+	//hide and show form when clicking reply button
     // Finds the closest .single_comment container for the clicked .reply button
     var $comment = $(this).closest(".single_comment");
-
     // Finds the .replyForm inside that specific .single_comment container and toggle it's visibility
     $comment.find(".replyForm").slideToggle();
 });
@@ -101,12 +94,11 @@ $(document).on("click", ".submitReply", function(){
 		type:'post',
 		success:function(response){
         $('.form_message').html(response);
-		// alert("Your comment has been posted");
         $.globalEval(response);
 		listComments();
 		}
 		})
-        //$('replyForm').hide();
+        $('replyForm').show();
 		});
 </script>
 
