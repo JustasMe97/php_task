@@ -35,6 +35,7 @@ if(mysqli_num_rows($parentComments)>0)
     <textarea id="comment" class="comment_textReply form-control" placeholder="Jūsų komentaras"></textarea>
     <br>
     <a href="javascript:void(0)" class="btn btn-light submitReply">Komentuoti</a>
+    <div class="form_message"></div>
     </div>
     </div>'
     ;
@@ -56,7 +57,7 @@ function getReplies($link,$parent_id){
                     <div class="bg-light rounded p-3 mt-2 mb-2 ms-5">
                         <div class="d-flex">
                             <div class="fw-bold">'.$row->name.'</div>
-                            <div class="mx-1">'.$row->comment_date.'</div>
+                            <div class="mx-1">'.date('d M Y', strtotime($row->comment_date)).'</div>
                         </div>
                             <div class="mt-1">'.$row->comment_text.'</div>
                             <div class="clearfix"></div>

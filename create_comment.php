@@ -1,11 +1,12 @@
 <?php
 $link = mysqli_connect("localhost","root","","comments");
-$name = mysqli_real_escape_string($link,$_POST['name']);
-$email = mysqli_real_escape_string($link,$_POST['email']);
+$name = htmlspecialchars(mysqli_real_escape_string($link,$_POST['name']));
+$email = htmlspecialchars(mysqli_real_escape_string($link,$_POST['email']));
 $parent_id = mysqli_real_escape_string($link,$_POST['parent_id']);
-$comment_text = mysqli_real_escape_string($link,$_POST['comment_text']);
+$comment_text = htmlspecialchars(mysqli_real_escape_string($link,$_POST['comment_text']));
 $comment_date = date_create()->format('Y-m-d H:i:s');
 
+//patikrinami laukai
     $errorEmptyName = false;
     $errorEmptyEmail = false;
     $errorEmptyComment = false;

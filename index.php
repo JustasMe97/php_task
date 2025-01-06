@@ -36,7 +36,7 @@
 
 
 <script type="text/javascript">
-
+//funkcija komentarų atvaizdavimui
 	function listComments()
 		{
 			$.ajax({
@@ -50,7 +50,7 @@
 	$(function(){
 
 		listComments();
-
+        //naujo komentaro pridėjimas naudojant ajax
 		$('.submit').click(function(){
 		var name = $('.name').val();
 		var email = $('.email').val();
@@ -74,15 +74,16 @@
 
 <script>
 $(document).on("click", ".reply", function() {
-	//hide and show form when clicking reply button
-    // Finds the closest .single_comment container for the clicked .reply button
+	//išskleidžia komentarų atsakymo formą
+    // Suranda arčiausią .single_comment konteinerį paspaustam .reply mygtukui
     var $comment = $(this).closest(".single_comment");
-    // Finds the .replyForm inside that specific .single_comment container and toggle it's visibility
+    // Suranda .replyForm viduje specifinio .single_comment konteinerio ir pakeičia matomumą
     $comment.find(".replyForm").slideToggle();
 });
 </script>
 
 <script>
+	//komentarų atsakymų pridėjimas
 $(document).on("click", ".submitReply", function(){
 		var name = $('.nameReply').val();
 		var email = $('.emailReply').val();
@@ -95,7 +96,12 @@ $(document).on("click", ".submitReply", function(){
 		success:function(response){
         $('.form_message').html(response);
         $.globalEval(response);
+		//jei formoje klaidų nėra, iš naujo atvaizduoti komentarus su naujai pridėtu
+		//jei yra klaidų, tada forma lieka
+		if(!response.includes("form-error")){
 		listComments();
+		}
+
 		}
 		})
         $('replyForm').show();
