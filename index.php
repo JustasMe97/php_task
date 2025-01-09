@@ -14,10 +14,10 @@
         <div class="d-flex align-items-center flex-column">
            
 		<div class="col-lg-6 col-md-12">
-			<input type="text" id="name" class="name form-control" placeholder="Vardas"><br>
+			<input type="text" id="name" class="name form-control" placeholder="Vardas" maxlength="20"><br>
 			<input type="text" id="email" class="email form-control" placeholder="El. paštas"><br>
             <input type="hidden" class="parent_id" value="-1">
-			<textarea id="comment" class="comment_text form-control" placeholder="Jūsų komentaras"></textarea>
+			<textarea id="comment" class="comment_text form-control"  placeholder="Jūsų komentaras (max 200 simbolių.)"></textarea>
              <br>
 			<a href="javascript:void(0)" class="btn btn-light submit">Komentuoti</a>
 		</div>
@@ -78,7 +78,13 @@ $(document).on("click", ".reply", function() {
     // Suranda arčiausią .single_comment konteinerį paspaustam .reply mygtukui
     var $comment = $(this).closest(".single_comment");
     // Suranda .replyForm viduje specifinio .single_comment konteinerio ir pakeičia matomumą
-    $comment.find(".replyForm").slideToggle();
+    $comment.find(".replyForm").slideToggle(function() {
+        // sufokusuoja į input lauką su klase 'nameReply' kai forma tampa matoma
+        if ($(this).is(":visible")) {
+            $(this).find(".nameReply").focus();
+        }
+    });
+
 });
 </script>
 

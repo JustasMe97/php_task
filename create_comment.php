@@ -11,6 +11,8 @@ $comment_date = date_create()->format('Y-m-d H:i:s');
     $errorEmptyEmail = false;
     $errorEmptyComment = false;
     $errorEmail = false;
+    $errorLongName = false;
+    $errorLongComment = false;
 if (empty($name) || empty($email) || empty($comment_text)) {
         echo "<span class='form-error'>Užpildykite visus laukus!</span>";
         $errorEmpty = true;
@@ -21,11 +23,20 @@ if (empty($name) || empty($email) || empty($comment_text)) {
         $errorEmptyEmail = true;
     }    if (empty($comment_text)) {
         $errorEmptyComment = true;
-    }
+    }   
+    
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "<span class='form-error'>
         Įveskite tinkamą el. pašto adresą! </span>";
         $errorEmail = true;
+    }
+    elseif (strlen($comment_text)>200) {
+        echo "<span class='form-error'>Komentaras per ilgas, max 200 simbolių!</span>";
+        $errorLongComment = true;
+    }   
+    elseif (strlen($name)>20) {
+        echo "<span class='form-error'>Vardas per ilgas, max 20 simbolių!</span>";
+        $errorLongName = true;
     }
     else {
         echo "<span class='form-success'>
@@ -47,11 +58,13 @@ var errorEmptyName = "'.$errorEmptyName.'";
 var errorEmptyEmail = "'.$errorEmptyEmail.'";
 var errorEmptyComment = "'.$errorEmptyComment.'";
 var errorEmail = "'.$errorEmail.'";
-if (errorEmptyName == true) {
+var errorLongComment = "'.$errorLongComment.'";
+var errorLongName = "'.$errorLongName.'";
+if (errorEmptyName == true || errorLongName == true ) {
     $("#name").addClass("input-error");
 }   if (errorEmptyEmail == true) {
     $("#email").addClass("input-error");
-}   if (errorEmptyComment == true) {
+}   if (errorEmptyComment == true || errorLongComment == true) {
     $("#comment").addClass("input-error");
 }
 if (errorEmail == true) {

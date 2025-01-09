@@ -29,10 +29,10 @@ if(mysqli_num_rows($parentComments)>0)
     </div>
     
     <div style="display:none;" class="replyForm ms-5">
-    <input type="text" id="name" class="nameReply form-control" placeholder="Vardas"><br>
+    <input type="text" id="name" class="nameReply form-control" placeholder="Vardas" maxlength="20"><br>
     <input type="text" id="email" class="emailReply form-control" placeholder="El. paštas"><br>
     <input type="hidden" class="parent_idReply" value="'.$row->id.'">
-    <textarea id="comment" class="comment_textReply form-control" placeholder="Jūsų komentaras"></textarea>
+    <textarea id="comment" class="comment_textReply form-control" placeholder="Jūsų komentaras (max 200 simbolių)" maxlength="200"></textarea>
     <br>
     <a href="javascript:void(0)" class="btn btn-light submitReply">Komentuoti</a>
     <div class="form_message"></div>
