@@ -91,10 +91,13 @@ $(document).on("click", ".reply", function() {
 <script>
 	//komentarų atsakymų pridėjimas
 $(document).on("click", ".submitReply", function(){
-		var name = $('.nameReply').val();
-		var email = $('.emailReply').val();
-        var parent_id = $('.parent_idReply').val();
-		var comment_text = $('.comment_textReply').val();
+
+		
+    var $container = $(this).closest('.single_comment'); //suranda į kurį komentarą atsakyti.
+    var parent_id = $container.find('.parent_idReply').val();
+    var name = $container.find('.nameReply').val();
+    var email = $container.find('.emailReply').val();
+    var comment_text = $container.find('.comment_textReply').val();
 		$.ajax({
 		url:'create_comment.php',
 		data:'name='+name+'&email='+email+'&parent_id='+parent_id+'&comment_text='+comment_text,
@@ -113,10 +116,3 @@ $(document).on("click", ".submitReply", function(){
         $('replyForm').show();
 		});
 </script>
-
-  
-
-
-
-
-
