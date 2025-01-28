@@ -1,9 +1,11 @@
 <?php
-$link = mysqli_connect("localhost","root","","comments");
-$name = htmlspecialchars(mysqli_real_escape_string($link,$_POST['name']));
-$email = htmlspecialchars(mysqli_real_escape_string($link,$_POST['email']));
-$parent_id = mysqli_real_escape_string($link,$_POST['parent_id']);
-$comment_text = htmlspecialchars(mysqli_real_escape_string($link,$_POST['comment_text']));
+
+require_once 'CommentsController.php';
+
+$name = htmlspecialchars($_POST['name']);
+$email = htmlspecialchars($_POST['email']);
+$parent_id = $_POST['parent_id'];
+$comment_text = htmlspecialchars($_POST['comment_text']);
 $comment_date = date_create()->format('Y-m-d H:i:s');
 
 //patikrinami laukai
@@ -43,8 +45,8 @@ if (empty($name) || empty($email) || empty($comment_text)) {
         Jūs sėkmingai pakomentavote!
         </span>";
         
-        $q = "INSERT INTO comments (name,email,parent_id,comment_text,comment_date) VALUES('".$name."','".$email."','".$parent_id."','".$comment_text."','".$comment_date."')";
-        mysqli_query($link,$q);
+        $commentsController = new CommentsController();
+        $commentsController->createComment($name, $email,$parent_id,$comment_text,$comment_date);
     }
 ?>
 <?php
