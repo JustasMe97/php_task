@@ -7,12 +7,4 @@ class CommentsController extends Comments {
         $this->setComment($name, $email,$parent_id,$comment_text,$comment_date);
     }
 
-    public function getCommentsCount(){
-
-        $results=$this->getAllComments();
-        return count($results);
-        }
-
-
-    
 }
