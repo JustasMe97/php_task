@@ -8,18 +8,18 @@ class Comments extends Dbh {
         $sql = "SELECT * FROM comments WHERE parent_id=? ORDER BY comment_date DESC";
         $stmt= $this->connect()->prepare($sql);
         $stmt->execute([$parent_id]);
-
         $results=$stmt->fetchAll();
+
         return $results;
 
     }
     
     protected function getCommentsCount() {
 
-        $sql = "SELECT * FROM comments ORDER BY comment_date DESC";
+        $sql = "SELECT * FROM comments";
         $stmt= $this->connect()->query($sql);
-
         $results=$stmt->fetchAll();
+
         return count($results);
     }
 
